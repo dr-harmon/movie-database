@@ -67,4 +67,20 @@ public:
     const Movie& getCurrent() const;
     // Ends the series of database operations
     void endTransaction();
+private:
+    // Linked list node
+    struct Node {
+        Movie movie;
+        Node *prev;
+        Node *next;
+    };
+    Node* header;   // Front of list
+    Node* trailer;  // Back of list
+    int size;       // Number of movies in the database
+    Node* current;  // For transactional operations, the current position
+
+    // Adds the given movie before the given node.
+    void add(Node* node, const Movie& movie);
+    // Removes the given node
+    void remove(Node* node);
 };
